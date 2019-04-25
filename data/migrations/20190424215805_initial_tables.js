@@ -24,7 +24,7 @@ exports.up = function(knex) {
             table.increments()
             table
                 .integer('user_id')
-                .unisgned()
+                .unsigned()
                 .notNullable()
                 .references('id')
                 .inTable('users')
@@ -45,7 +45,7 @@ exports.up = function(knex) {
             table.increments()
             table
                 .integer('form_id')
-                .unisgned()
+                .unsigned()
                 .notNullable()
                 .references('id')
                 .inTable('forms')
@@ -68,7 +68,7 @@ exports.up = function(knex) {
             table.increments()
             table
                 .integer('form_id')
-                .unisgned()
+                .unsigned()
                 .notNullable()
                 .references('id')
                 .inTable('forms')
@@ -89,7 +89,7 @@ exports.up = function(knex) {
             table.increments()
             table
                 .integer('form_id')
-                .unisgned()
+                .unsigned()
                 .notNullable()
                 .references('id')
                 .inTable('forms')
@@ -114,7 +114,7 @@ exports.up = function(knex) {
             table.increments()
             table
                 .integer('user_id')
-                .unisgned()
+                .unsigned()
                 .notNullable()
                 .references('id')
                 .inTable('users')
