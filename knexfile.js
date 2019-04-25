@@ -1,9 +1,9 @@
-require('dotenv').config();
+require('dotenv').config()
 
 const localPgConnection = {
-  host: '127.0.0.1',
+  host: 'localhost',
   user: 'postgres',
-  password: 'matt123!',
+  password: process.env.DB_PASSWORD,
   database: 'linkedinchrome'
 }
 
