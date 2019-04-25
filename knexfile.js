@@ -1,8 +1,10 @@
+require('dotenv').config();
+
 const localPgConnection = {
-  host: 'localhost',
-  database: 'db',
-  user: 'admin',
-  password: 'password'
+  host: '127.0.0.1',
+  user: 'postgres',
+  password: 'matt123!',
+  database: 'linkedinchrome'
 }
 
 const prodDbConnection = process.env.DATABASE_URL || localPgConnection
@@ -10,7 +12,7 @@ const prodDbConnection = process.env.DATABASE_URL || localPgConnection
 module.exports = {
   development: {
     client: 'pg',
-    connection: { filename: './data/db.db3' },
+    connection: prodDbConnection,
     useNullAsDefault: true,
     migrations: {
       directory: './data/migrations'
