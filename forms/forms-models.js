@@ -14,5 +14,6 @@ const newForm = async form => {
 };
 
 module.exports = {
-    
+    getByFormId,
+    newForm
 }
