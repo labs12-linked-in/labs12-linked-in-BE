@@ -140,8 +140,8 @@ exports.up = function(knex) {
 exports.down = function(knex) {
     return knex.schema
         .dropTableIfExists('users')
-        .dropTableIfExists('departments')
         .dropTableIfExists('forms')
         .dropTableIfExists('form_fields')
         .dropTableIfExists('form_rules_default')
+        .dropTableIfExists('departments')
 };
