@@ -74,7 +74,7 @@ exports.up = function(knex) {
                 .inTable('forms')
                 .onDelete('CASCADE')
                 .onUpdate('CASCADE')
-            table.integer('send_to').notNullable()
+            table.string('send_to').notNullable()
             table
                 .datetime('created_at')
                 .notNullable()
