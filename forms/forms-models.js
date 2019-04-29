@@ -29,8 +29,15 @@ const getAllByUserId = id => {
         )
 };
 
+const removeForm = id => {
+    return db('forms')
+        .where({ id })
+        .del()
+};
+
 module.exports = {
     getByFormId,
     newForm,
     getAllByUserId,
+    removeForm,
 }

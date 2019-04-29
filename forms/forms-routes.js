@@ -23,7 +23,6 @@ router.post('/:id', async (req, res) => {
 
 // get all forms
 router.get('/:id', async (req, res) => {
-    // console.log('req: ', req.user_id)
     // if (req.user_id.toString() === req.params.id) {
         try{
             const forms = await Forms.getAllByUserId(req.params.id)
@@ -40,7 +39,7 @@ router.get('/:id', async (req, res) => {
 
 // delete a form
 router.delete('/:id/:formId', async (req, res) => {
-    if (req.user_id.toString() === req.params.id) {
+    // if (req.user_id.toString() === req.params.id) {
         try {
             const count = await Forms.removeForm(req.params.formId)
             if (count > 0) {
@@ -52,9 +51,9 @@ router.delete('/:id/:formId', async (req, res) => {
             console.log(error)
             res.status(500).json({ message: 'Server error deleting the form' })
         }
-    } else {
-        return res.status(401).json({ message: 'Unauthorized' })
-    }
+    // } else {
+    //     return res.status(401).json({ message: 'Unauthorized' })
+    // }
 });
 
 module.exports = router
