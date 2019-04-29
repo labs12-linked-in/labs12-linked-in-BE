@@ -2,7 +2,7 @@ const router = require('express').Router();
 
 const Forms = require('./forms-models.js');
 
-// add a new form for a specific user
+// add a new form
 router.post('/:userId', async (req, res) => {
     if (!req.body.name) {
         res.status(406).json({ message: 'Form name required' })
@@ -21,7 +21,7 @@ router.post('/:userId', async (req, res) => {
     }
 });
 
-// get all forms for a specific user
+// get all forms
 router.get('/:userId', async (req, res) => {
     // if (req.user_id.toString() === req.params.userId) {
         try{
@@ -37,7 +37,7 @@ router.get('/:userId', async (req, res) => {
     // }
 })
 
-// delete a specific form for a specific user
+// delete a form
 router.delete('/:userId/:formId', async (req, res) => {
     // if (req.user_id.toString() === req.params.userId) {
         try {
@@ -56,7 +56,7 @@ router.delete('/:userId/:formId', async (req, res) => {
     // }
 });
 
-// update a specific form for a specific user
+// update a form
 router.put('/:userId/:formId', async (req, res) => {
     // if (req.user_id.toString() === req.params.userId) {
         try {

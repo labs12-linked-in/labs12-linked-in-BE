@@ -35,7 +35,7 @@ const removeForm = id => {
         .del()
 };
 
-const updateForm = (id, form) => {
+const updateForm = async (id, form) => {
     await db('forms')
         .where({ id })
         .update(form)
