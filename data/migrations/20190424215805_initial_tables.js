@@ -61,50 +61,27 @@ exports.up = function(knex) {
         .notNullable()
         .defaultTo(knex.fn.now())
     })
-
-        .createTable('form_fields', table => {
-            table.increments()
-            table
-                .integer('form_id')
-                .unsigned()
-                .notNullable()
-                .references('id')
-                .inTable('forms')
-                .onDelete('CASCADE')
-                .onUpdate('CASCADE')
-            table.string('name').notNullable()
-            table.string('type').notNullable()
-            table.string('selected').notNullable()
-            table
-                .datetime('created_at')
-                .notNullable()
-                .defaultTo(knex.fn.now())
-            table
-                .datetime('updated_at')
-                .notNullable()
-                .defaultTo(knex.fn.now())  
-        })
         
-        .createTable('form_rules_default', table => {
-            table.increments()
-            table
-                .integer('form_id')
-                .unsigned()
-                .notNullable()
-                .references('id')
-                .inTable('forms')
-                .onDelete('CASCADE')
-                .onUpdate('CASCADE')
-            table.string('send_to').notNullable()
-            table
-                .datetime('created_at')
-                .notNullable()
-                .defaultTo(knex.fn.now())
-            table
-                .datetime('updated_at')
-                .notNullable()
-                .defaultTo(knex.fn.now())     
-        })
+    .createTable('form_rules_default', table => {
+        table.increments()
+        table
+            .integer('form_id')
+            .unsigned()
+            .notNullable()
+            .references('id')
+            .inTable('forms')
+            .onDelete('CASCADE')
+            .onUpdate('CASCADE')
+        table.string('send_to').notNullable()
+        table
+            .datetime('created_at')
+            .notNullable()
+            .defaultTo(knex.fn.now())
+        table
+            .datetime('updated_at')
+            .notNullable()
+            .defaultTo(knex.fn.now())     
+    })
 
     .createTable('form_rules', table => {
       table.increments()
