@@ -1,33 +1,33 @@
-require('dotenv').config()
+require("dotenv").config();
 
 const localPgConnection = {
-  host: '127.0.0.1',
-  user: process.env.PG_USER || 'postgres',
-  password: process.env.PG_PASSWORD || 'matt123!',
-  database: 'linkedinchrome'
-}
+  host: "localhost",
+  user: "postgres",
+  password: process.env.DB_PASSWORD,
+  database: "linkedinchrome"
+};
 
-const prodDbConnection = process.env.DATABASE_URL || localPgConnection
+const prodDbConnection = process.env.DATABASE_URL || localPgConnection;
 
 module.exports = {
   development: {
-    client: 'pg',
+    client: "pg",
     connection: prodDbConnection,
-    migrations: { directory: './data/migrations'},
-    seeds: { directory: './data/seeds' }
+    migrations: { directory: "./data/migrations" },
+    seeds: { directory: "./data/seeds" }
   },
 
   testing: {
-    client: 'pg',
-    connection: { filename: './data/db.db3' },
-    migrations: { directory: './data/migrations' },
-    seeds: { directory: './data/seeds' }
+    client: "pg",
+    connection: { filename: "./data/db.db3" },
+    migrations: { directory: "./data/migrations" },
+    seeds: { directory: "./data/seeds" }
   },
 
   production: {
-    client: 'pg',
+    client: "pg",
     connection: prodDbConnection,
-    migrations: { directory: './data/migrations' },
-    seeds: { directory: './data/seeds/' },
+    migrations: { directory: "./data/migrations" },
+    seeds: { directory: "./data/seeds/" }
   }
-}
+};
