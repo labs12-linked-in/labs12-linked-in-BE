@@ -35,9 +35,20 @@ const removeForm = id => {
         .del()
 };
 
+const updateForm = (id, form) => {
+    await db('forms')
+        .where({ id })
+        .update(form)
+        .update('updated_at', db.fn.now())
+    return db('forms')
+        .where({ id })
+        .first()
+}
+
 module.exports = {
     getByFormId,
     newForm,
     getAllByUserId,
     removeForm,
+    updateForm,
 }
