@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config()
 
 const localPgConnection = {
   host: '127.0.0.1',
