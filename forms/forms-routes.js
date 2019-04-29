@@ -56,4 +56,23 @@ router.delete('/:userId/:formId', async (req, res) => {
     // }
 });
 
+// update a specific form for a specific user
+router.put('/:userId/:formId', async (req, res) => {
+    if (req.user_id.toString() === req.params.userId) {
+        try {
+            const newForm = {...req.body}
+            const form = await Forms.updateForm(
+                req.params.formId,
+                newForm
+            )
+            res.status(200).json(form)
+        } catch (error) {
+            console.log(error)
+            res.status(500).json({ message: 'Server error updating form' })
+        }
+    } else {
+        return res.status(401).json({ message: 'Unauthorized' })
+    }
+});
+
 module.exports = router
