@@ -21,4 +21,20 @@ router.post('/:id', async (req, res) => {
     }
 });
 
+// get all forms for a user
+router.get('/:id', async (req, res) => {
+    if (req.user_id.toString() === req.params.id) {
+        try{
+            const forms = await Forms.getAllByUserId(req.params.id)
+            await forms.sort((a, b) => b.created_at - a.created_at)
+            res.status(200).json(forms)
+        } catch (error) {
+            console.log(error)
+            res.status(500).json({ message: 'Server error retrieving forms' })
+        }
+    } else {
+        return res.status(401).json({ message: 'Unauthorized' })
+    }
+})
+
 module.exports = router
