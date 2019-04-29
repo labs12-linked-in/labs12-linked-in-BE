@@ -36,7 +36,7 @@ router.post('/banish', (req, res) => {
   User.deleteUser(user_ID)
     .then(res => {
       res
-        .status(500)
+        .status(200)
         .json({ message: 'user has been banished from this database' })
     })
     .catch(error => {

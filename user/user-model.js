@@ -23,8 +23,8 @@ async function addUser(user) {
     .first()
 }
 
-async function deleteUser(id, user) {
+async function deleteUser(id) {
   return db('users')
     .where('id', id)
-    .update(user, 'id')
+    .del()
 }
