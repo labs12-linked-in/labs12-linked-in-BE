@@ -2,15 +2,15 @@ const router = require('express').Router();
 
 const Forms = require('./forms-models.js');
 
-// add a new form
-router.post('/:id', async (req, res) => {
+// add a new form for a specific user
+router.post('/:userId', async (req, res) => {
     if (!req.body.name) {
         res.status(406).json({ message: 'Form name required' })
         return
     }
     try {
         const form = {
-            user_id: req.params.id,
+            user_id: req.params.userId,
             name: req.body.name
         }
         const newForm = await Forms.newForm(form)
@@ -21,11 +21,11 @@ router.post('/:id', async (req, res) => {
     }
 });
 
-// get all forms
-router.get('/:id', async (req, res) => {
-    // if (req.user_id.toString() === req.params.id) {
+// get all forms for a specific user
+router.get('/:userId', async (req, res) => {
+    // if (req.user_id.toString() === req.params.userId) {
         try{
-            const forms = await Forms.getAllByUserId(req.params.id)
+            const forms = await Forms.getAllByUserId(req.params.userId)
             await forms.sort((a, b) => b.created_at - a.created_at)
             res.status(200).json(forms)
         } catch (error) {
@@ -37,9 +37,9 @@ router.get('/:id', async (req, res) => {
     // }
 })
 
-// delete a form
-router.delete('/:id/:formId', async (req, res) => {
-    // if (req.user_id.toString() === req.params.id) {
+// delete a specific form for a specific user
+router.delete('/:userId/:formId', async (req, res) => {
+    // if (req.user_id.toString() === req.params.userId) {
         try {
             const count = await Forms.removeForm(req.params.formId)
             if (count > 0) {
