@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const querystring = require('querystring');
+const querystring = require('querystring');  //in node, module provides utilities for parsing and formatting URL
 const axios = require('axios');
 const jwt = require('jsonwebtoken');
 const R = require('ramda');
@@ -19,7 +19,7 @@ router.post('/login', async (req, res) => {
     try {
         const { code } = req.body;
 
-        const formData = `grant_type=authorization_code&code=${code}&redirect_uri=${REQUEST_URI}&client_secret=${CLIENT_SECRET}`;
+        const formData = `&client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}&grant_type=authorization_code&redirect_uri=${REQUEST_URI}&code=${code}`;
         const contentLength = formData.length;
         const dataA = await
             axios({
@@ -33,10 +33,11 @@ router.post('/login', async (req, res) => {
             })
 
         const accessToken = dataA.data['access_token'];
+        console.log('access_token')
 
         const dataB = await
             axios({
-                url: `https://api.linkedin.com/v1/people/~:(id)?format=json`,
+                url: `https://api.linkedin.com/v2/me`,
                 method: 'GET',
                 headers: {
                     Authorization: `Bearer ${accessToken}`,
@@ -59,7 +60,7 @@ router.post('/login', async (req, res) => {
 router.get('/linkedinData', async (req, res) => {
     try {
         const relic = req.headers['x-access-token'];
-        if (relic === 'null' || R.isNil(t)) {
+        if (relic === 'null' || R.isNil(relic)) {    //checks if the value is true or false
             throw 'missing a token'
         }
         jwt.verify(relic, secret.jwtSecret, async (err, decoded) => {
@@ -67,7 +68,7 @@ router.get('/linkedinData', async (req, res) => {
 
             const data = await
                 axios({
-                    url: `https://api.linkedin.com/v1/people/id=${id}:(first-name,last-name)?format=json`,
+                    url: `https://api.linkedin.com/v2/me`,   //pulls the profile info of the logged in user minus email
                     method: 'GET',
                     headers: {
                         Authorization: `Bearer ${token}`,
