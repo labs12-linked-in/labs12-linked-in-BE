@@ -13,7 +13,42 @@ const newForm = async form => {
     return getByFormId(id)
 };
 
+const getAllByUserId = id => {
+    return db('forms')
+        .join('users', 'forms.user_id', 'users.id')
+        .where('users.id', id)
+        .select(
+            'forms.id as form_id',
+            'forms.name',
+            'forms.created_at',
+            'forms.updated_at',
+            'users.id as user_id',
+            'users.first_name',
+            'users.last_name',
+            'users.email',
+        )
+};
+
+const removeForm = id => {
+    return db('forms')
+        .where({ id })
+        .del()
+};
+
+const updateForm = async (id, form) => {
+    await db('forms')
+        .where({ id })
+        .update(form)
+        .update('updated_at', db.fn.now())
+    return db('forms')
+        .where({ id })
+        .first()
+}
+
 module.exports = {
     getByFormId,
-    newForm
+    newForm,
+    getAllByUserId,
+    removeForm,
+    updateForm,
 }

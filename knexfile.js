@@ -1,9 +1,9 @@
 require('dotenv').config()
 
 const localPgConnection = {
-  host: 'localhost',
-  user: 'postgres',
-  password: process.env.DB_PASSWORD,
+  host: '127.0.0.1',
+  user: process.env.PG_USER || 'postgres',
+  password: process.env.PG_PASSWORD || 'matt123!',
   database: 'linkedinchrome'
 }
 
@@ -13,36 +13,21 @@ module.exports = {
   development: {
     client: 'pg',
     connection: prodDbConnection,
-    useNullAsDefault: true,
-    migrations: {
-      directory: './data/migrations'
-    },
+    migrations: { directory: './data/migrations'},
     seeds: { directory: './data/seeds' }
   },
 
   testing: {
     client: 'pg',
-    connection: {
-      filename: './data/db.db3'
-    },
-    useNullAsDefault: true,
-    migrations: {
-      directory: './data/migrations'
-    },
-    seeds: {
-      directory: './data/seeds'
-    }
+    connection: { filename: './data/db.db3' },
+    migrations: { directory: './data/migrations' },
+    seeds: { directory: './data/seeds' }
   },
 
   production: {
     client: 'pg',
     connection: prodDbConnection,
-    migrations: {
-      directory: './data/migrations'
-    },
-    seeds: {
-      directory: './data/seeds/'
-    },
-    useNullAsDefault: true
+    migrations: { directory: './data/migrations' },
+    seeds: { directory: './data/seeds/' },
   }
 }
