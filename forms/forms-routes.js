@@ -35,7 +35,7 @@ router.get('/:userId', async (req, res) => {
     // } else {
         // return res.status(401).json({ message: 'Unauthorized' })
     // }
-})
+});
 
 // delete a form
 router.delete('/:userId/:formId', async (req, res) => {
