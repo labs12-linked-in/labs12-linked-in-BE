@@ -8,7 +8,7 @@ module.exports = {
 
 async function verifyUser(user) {
   const selected = db('users')
-    .where('user_ID', user.user_ID)
+    .where('user_id', user.user_ID)
     .first()
 
   return selected

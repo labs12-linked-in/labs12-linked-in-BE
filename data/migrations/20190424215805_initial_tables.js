@@ -5,7 +5,7 @@ exports.up = function(knex) {
       table.string('first_name').notNullable()
       table.string('last_name').notNullable()
       table
-        .string('user_ID')
+        .string('user_id')
         .notNullable()
         .unique()
       table

@@ -25,7 +25,6 @@ const getAllByUserId = id => {
             'users.id as user_id',
             'users.first_name',
             'users.last_name',
-            'users.email',
         )
 };
 

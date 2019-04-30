@@ -12,6 +12,7 @@ const users = require('../user/user-routes')
 server.use(bodyParser.json())
 
 const forms = require('../forms/forms-routes.js')
+const departments = require('../departments/departments-routes.js')
 
 configureMiddleware(server)
 
@@ -20,8 +21,9 @@ server.get('/', (req, res) => {
 })
 
 server.use('/api/users', users)
-
 server.use('/api/auth', authRouter)
 server.use('/api/forms', forms)
+server.use('/api/departments', departments)
+
 
 module.exports = server
