@@ -10,10 +10,39 @@ const newDepartment = async department => {
     const [id] = await db('departments')
         .insert(department)
         .returning('id')
+
     return getByDepartmentId(id)
+};
+
+const getAllByUserId = id => {
+    return db('departments')
+        .join('users', 'departments.user_id', 'users.id')
+        .where('users.id', id)
+        .select(
+            'departments.id as department_id',
+            'departments.name',
+            'departments.admin_email',
+            'departments.supervisor_email',
+            'departments.manager_email',
+            'departments.director_email',
+            'departments.vp_email',
+            'departments.created_at',
+            'departments.updated_at',
+            'users.id as user_id',
+            'users.first_name',
+            'users.last_name',
+        )
+};
+
+const removeDepartment = id => {
+    return db('departments')
+        .where({ id })
+        .del()
 };
 
 module.exports = {
     getByDepartmentId,
     newDepartment,
+    getAllByUserId,
+    removeDepartment,
 }
