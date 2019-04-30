@@ -21,9 +21,9 @@ server.get('/', (req, res) => {
 })
 
 server.use('/api/users', users)
-
 server.use('/api/auth', authRouter)
 server.use('/api/forms', forms)
+server.use('/api/departments', departments)
 
 
 module.exports = server

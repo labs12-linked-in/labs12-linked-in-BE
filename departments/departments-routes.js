@@ -10,7 +10,7 @@ router.post('/:userId', async (req, res) => {
     }
     try {
         const department = {
-            user_id: req.params.user_id,
+            user_id: req.params.userId,
             name: req.body.name,
             admin_email: req.body.admin,
             supervisor_email: req.body.supervisor,
@@ -25,3 +25,5 @@ router.post('/:userId', async (req, res) => {
         res.status(500).json({ message: 'Server error creating new department' })
     }
 });
+
+module.exports = router
