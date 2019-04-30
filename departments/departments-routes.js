@@ -62,4 +62,24 @@ router.delete('/:userId/:deptId', async (req, res) => {
 // }
 });
 
+// update a department
+router.put('/:userId/:deptId', async (req, res) => {
+    // if (req.user_id.toString() === req.params.userId) {
+        try {
+            const newDepartment = {...req.body}
+            const department = await Departments.updateDepartment(
+                req.params.deptId,
+                newDepartment
+            )
+            res.status(200).json(department)
+        } catch (error) {
+            console.log(error)
+            res.status(500).json({ message: 'Server error updating department' })
+        }
+    // } else {
+        // return res.status(401).json({ message: 'Unauthorized' })
+    // }
+
+});
+
 module.exports = router

@@ -40,9 +40,20 @@ const removeDepartment = id => {
         .del()
 };
 
+const updateDepartment = async (id, department) => {
+    await db('departments')
+        .where({ id })
+        .update(department)
+        .update('updated_at', db.fn.now())
+    return db('departments')
+        .where({ id })
+        .first()
+}
+
 module.exports = {
     getByDepartmentId,
     newDepartment,
     getAllByUserId,
     removeDepartment,
+    updateDepartment,
 }
