@@ -6,7 +6,9 @@ const cookiesMiddleware = require('universal-cookie-express');
 
 const configureMiddleware = require('./middleware.js');
 const authRouter = require('../authenticate/auth-routes.js');
-const forms = require('../forms/forms-routes.js')
+const forms = require('../forms/forms-routes.js');
+const users = require('../user/user-routes.js');
+const departments = requires('../departments/departments-routes.js');
 
 const server = express();
 require('../config/passport');
@@ -14,7 +16,7 @@ require('../config/passport');
 configureMiddleware(server);
 
 //express middleware to parse req.body before handlers
-server.use(bodyParser.json());
+server.use(bodyParser.json())
 
 
 server.use(cookiesMiddleware());
@@ -26,9 +28,12 @@ server.use(passport.initialize());
 
 server.get('/', (req, res) => {
   res.status(200).send('Hello Earthling')
-});
+})
 
-server.use('/api/auth', authRouter);
-server.use('/api/forms', forms);
+server.use('/api/users', users)
+server.use('/api/auth', authRouter)
+server.use('/api/forms', forms)
+server.use('/api/departments', departments)
+
 
 module.exports = server
