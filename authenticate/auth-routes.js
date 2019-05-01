@@ -1,86 +1,40 @@
 const router = require('express').Router();
-const querystring = require('querystring');  //in node, module provides utilities for parsing and formatting URL
-const axios = require('axios');
-const jwt = require('jsonwebtoken');
-const R = require('ramda');
-
-const apiInfo = require('./credentials/linkedin-api-keys.json');
-const secret = require('./secret.js');
-
-const { CLIENT_ID, CLIENT_SECRET } = JSON.parse(JSON.stringify(apiInfo));
-const REQUEST_URI = 'http://localhost:3000/api/auth/verifying';
+const passport = require('passport');
 
 
-router.get('/home', async (req, res) => {
-    res.redirect(`http://localhost:3000/api/auth/verifying?${querystring.stringify(req.query)}`)
+
+router.get('/', function(req, res) {
+    res.render('index', { user: req.user })
 })
 
-router.post('/login', async (req, res) => {
-    try {
-        const { code } = req.body;
+//router.get('/login', function(req,res) {
+  //  res.render('login', { user: req.user })
+//});
 
-        const formData = `&client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}&grant_type=authorization_code&redirect_uri=${REQUEST_URI}&code=${code}`;
-        const contentLength = formData.length;
-        const dataA = await
-            axios({
-                url: 'https://www.linkedin.com/oauth/v2/accessToken',
-                method: 'POST',
-                headers: {
-                    'Content-Length': contentLength,
-                    'Content-type': 'application/x-www-form-urlencoded'
-                },
-                data: formData
-            })
+//passport.authenticate() as route middleware to auth. if auth fails, user is redirected back to login. Otherwise primary route function is called
+router.get('/login',
+    passport.authenticate('linkedin', { state: 'SOMESTATE'}),
+    function(req, res) {});
 
-        const accessToken = dataA.data['access_token'];
-        console.log('access_token')
+router.get('/linkedin/callback',
+    passport.authenticate('linkedin'),
+    function(req, res) {
+        res.redirect('http://localhost:3000');
+    });
 
-        const dataB = await
-            axios({
-                url: `https://api.linkedin.com/v2/me`,
-                method: 'GET',
-                headers: {
-                    Authorization: `Bearer ${accessToken}`,
-                }
-            })
 
-        const { id } = dataB.data;
-
-        const token = jwt.sign({ id, token: accessToken }, secret.jwtSecret, {
-            expiresIn: 7200  //expires in 12 hours
-        })
-
-        res.status(200).send({ token });
-    } catch (err) {
-        res.status(401).send({ error: 'Failed LinkedIn Verification' })
-    }
+router.get('/logout', function(req, res){
+    req.logout();
+    res.redirect('/login');
 })
 
 
-router.get('/linkedinData', async (req, res) => {
-    try {
-        const relic = req.headers['x-access-token'];
-        if (relic === 'null' || R.isNil(relic)) {    //checks if the value is true or false
-            throw 'missing a token'
-        }
-        jwt.verify(relic, secret.jwtSecret, async (err, decoded) => {
-            const { id, token } = decoded;
-
-            const data = await
-                axios({
-                    url: `https://api.linkedin.com/v2/me`,   //pulls the profile info of the logged in user minus email
-                    method: 'GET',
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    }
-                })
-
-                res.status(200).send({ data: data.data })
-        })
-    } catch (err) {
-        res.status(401).send({ error: 'Failed LinkedIn Verification' })
-    }
-})
+//route middleware that checks if user is authenticated
+//use on any resource that is restricted.
+function ensureAuthenticated(req, res, next) {
+    if (req.isAuthenticated()) { return next(); }
+    res.redirect('login');
+}
 
 
 module.exports = router;
