@@ -48,7 +48,7 @@ const updateDepartment = async (id, department) => {
     return db('departments')
         .where({ id })
         .first()
-}
+};
 
 module.exports = {
     getByDepartmentId,
@@ -56,4 +56,4 @@ module.exports = {
     getAllByUserId,
     removeDepartment,
     updateDepartment,
-}
+};
