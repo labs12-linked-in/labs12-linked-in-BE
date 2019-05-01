@@ -37,4 +37,18 @@ router.get('/default/:userId/:formId', async (req, res) => {
     // }
 });
 
+// update for_rules_default
+router.put('/default/:userId/:formId', async (req, res) => {
+    // if (req.user_id.toString() === req.params.userId) {
+        try {
+
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({ message: 'Server error updating form' });
+        }
+    // } else {
+    //     return res.status(401).json({message: 'Unautohrized'  });
+    // }
+});
+
 module.exports = router
