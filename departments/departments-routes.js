@@ -5,11 +5,10 @@ const Departments = require('./departments-models.js');
 // add a new department
 router.post('/:userId', async (req, res) => {
     if (!req.body.name || !req.body.admin_email) {
-        res.status(406).json({ message: 'Form name and admin email required' })
-        return
+        res.status(406).json({ message: 'Form name and admin email required' });
+        return;
     }
     try {
-        console.log("req.body: ", req.body)
         const department = {
             user_id: req.params.userId,
             name: req.body.name,
