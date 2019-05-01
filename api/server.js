@@ -9,6 +9,7 @@ const authRouter = require('../authenticate/auth-routes.js');
 const forms = require('../forms/forms-routes.js');
 const users = require('../user/user-routes.js');
 const departments = require('../departments/departments-routes.js');
+const defaultRules = require('../form_rules/rules-default-routes.js');
 
 const server = express();
 require('../config/passport');
