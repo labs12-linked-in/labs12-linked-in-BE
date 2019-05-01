@@ -8,7 +8,7 @@ module.exports = {
 
 async function verifyUser(user) {
   const selected = db('users')
-    .where('user_ID', user.user_ID)
+    .where('user_id', user.user_id)
     .first()
 
   return selected
@@ -24,7 +24,10 @@ async function addUser(user) {
 }
 
 async function deleteUser(id) {
-  return db('users')
+  const deleted = db('users')
     .where('id', id)
     .del()
+  console.log(deleted, 'hi')
+
+  return deleted
 }

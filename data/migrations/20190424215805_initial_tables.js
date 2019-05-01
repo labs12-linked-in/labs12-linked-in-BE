@@ -5,7 +5,7 @@ exports.up = function(knex) {
       table.string('first_name').notNullable()
       table.string('last_name').notNullable()
       table
-        .string('user_ID')
+        .string('user_id')
         .notNullable()
         .unique()
       table
@@ -61,26 +61,26 @@ exports.up = function(knex) {
         .notNullable()
         .defaultTo(knex.fn.now())
     })
-        
+
     .createTable('form_rules_default', table => {
-        table.increments()
-        table
-            .integer('form_id')
-            .unsigned()
-            .notNullable()
-            .references('id')
-            .inTable('forms')
-            .onDelete('CASCADE')
-            .onUpdate('CASCADE')
-        table.string('send_to').notNullable()
-        table
-            .datetime('created_at')
-            .notNullable()
-            .defaultTo(knex.fn.now())
-        table
-            .datetime('updated_at')
-            .notNullable()
-            .defaultTo(knex.fn.now())     
+      table.increments()
+      table
+        .integer('form_id')
+        .unsigned()
+        .notNullable()
+        .references('id')
+        .inTable('forms')
+        .onDelete('CASCADE')
+        .onUpdate('CASCADE')
+      table.string('send_to').notNullable()
+      table
+        .datetime('created_at')
+        .notNullable()
+        .defaultTo(knex.fn.now())
+      table
+        .datetime('updated_at')
+        .notNullable()
+        .defaultTo(knex.fn.now())
     })
 
     .createTable('form_rules', table => {
