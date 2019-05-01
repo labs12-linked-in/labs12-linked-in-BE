@@ -11,22 +11,26 @@
   "repository": "https://github.com/labs12-linked-in/labs12-linked-in-BE",
   "license": "MIT",
   "dependencies": {
+    "@sokratis/passport-linkedin-oauth2": "^2.0.2",
     "axios": "^0.18.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "dotenv": "^7.0.0",
     "express": "^4.16.4",
+    "express-session": "^1.16.1",
     "helmet": "^3.16.0",
     "heroku": "^7.22.9",
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.16.5",
     "knex-cleaner": "^1.1.4",
+    "passport": "^0.4.0",
     "pg": "^7.9.0",
     "querystring": "^0.2.0",
     "ramda": "^0.26.1",
     "router-express": "^1.5.2",
-    "sqlite3": "^4.0.6"
+    "sqlite3": "^4.0.6",
+    "universal-cookie-express": "^3.1.0"
   },
   "devDependencies": {
     "cross-env": "^5.2.0",
