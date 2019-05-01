@@ -119,7 +119,7 @@ exports.up = function(knex) {
         .onDelete('CASCADE')
         .onUpdate('CASCADE')
       table.string('name').notNullable()
-      table.string('admin_email')
+      table.string('admin_email').notNullable()
       table.string('supervisor_email')
       table.string('manager_email')
       table.string('director_email')

@@ -16,7 +16,7 @@ require('../config/passport');
 configureMiddleware(server);
 
 //express middleware to parse req.body before handlers
-server.use(bodyParser.json())
+server.use(bodyParser.json());
 
 
 server.use(cookiesMiddleware());
@@ -27,13 +27,14 @@ server.use(passport.initialize());
 
 
 server.get('/', (req, res) => {
-  res.status(200).send('Hello Earthling')
-})
+  res.status(200).send('Hello Earthling');
+});
 
-server.use('/api/users', users)
-server.use('/api/auth', authRouter)
-server.use('/api/forms', forms)
-server.use('/api/departments', departments)
+server.use('/api/users', users);
+server.use('/api/auth', authRouter);
+server.use('/api/forms', forms);
+server.use('/api/departments', departments);
+server.use('/api/rules', defaultRules);
 
 
 module.exports = server
