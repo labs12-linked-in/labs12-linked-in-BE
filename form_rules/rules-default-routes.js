@@ -41,7 +41,12 @@ router.get('/default/:userId/:formId', async (req, res) => {
 router.put('/default/:userId/:formId', async (req, res) => {
     // if (req.user_id.toString() === req.params.userId) {
         try {
-
+            const newDefaultRule = {...req.body};
+            const defaultRule = await RulesDefault.updateDefaultRule(
+                req.params.formId,
+                newDefaultRule
+            );
+            res.status(200).json(defaultRule);
         } catch (error) {
             console.log(error);
             res.status(500).json({ message: 'Server error updating form' });
