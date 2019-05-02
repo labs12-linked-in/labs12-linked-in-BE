@@ -5,9 +5,9 @@ const bcrypt = require('bcryptjs')
 //verify if user exists, if so return user if not add user then return user
 
 router.post('/user', async (req, res) => {
-  const { user_ID } = req.body
+  const { user_id } = req.body
 
-  if (!user_ID) {
+  if (!user_id) {
     res.status(400).json({ message: 'Please provide user id.' })
   }
 
@@ -26,20 +26,22 @@ router.post('/user', async (req, res) => {
 
 //delete user
 
-router.post('/banish', (req, res) => {
-  const { user_ID } = req.body
+router.delete('/banish', (req, res) => {
+  const { user_id } = req.body
 
-  if (!user_ID) {
+  if (!user_id) {
     res.status(400).json({ message: 'Please provide user id.' })
   }
 
-  User.deleteUser(user_ID)
-    .then(res => {
+  User.deleteUser(user_id)
+    .then(response => {
+      console.log(res, 'res')
       res
         .status(200)
         .json({ message: 'user has been banished from this database' })
     })
     .catch(error => {
+      console.log(error, 'er')
       res.status(500).json({ err: 'Could not delete user', error })
     })
 })
