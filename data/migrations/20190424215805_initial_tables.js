@@ -93,7 +93,7 @@ exports.up = function(knex) {
         .inTable('form_fields')
         .onDelete('CASCADE')
         .onUpdate('CASCADE')
-      table.string('name').notNullable()
+      // table.string('name').notNullable()
       table.string('operator').notNullable()
       table.string('text_compare')
       table.integer('number_compare')
