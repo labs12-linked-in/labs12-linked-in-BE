@@ -23,7 +23,6 @@ router.get('/linkedin/callback', passport.authenticate('linkedin'), function(
   res.redirect('http://localhost:3000')
 })
 
-<<<<<<< HEAD
 router.get('/authenticate',
     function(req, res) {
         const user = req.user
@@ -31,12 +30,6 @@ router.get('/authenticate',
     }
 )
 
-=======
-router.get('/logout', function(req, res) {
-  req.logout()
-  res.redirect('/login')
-})
->>>>>>> cdad588db4863b4f01b63d17ed1b1752a36cacf6
 
 //route middleware that checks if user is authenticated
 //use on any resource that is restricted.
