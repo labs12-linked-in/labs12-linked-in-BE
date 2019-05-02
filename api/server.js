@@ -7,10 +7,6 @@ const cookiesMiddleware = require('universal-cookie-express')
 const configureMiddleware = require('./middleware.js')
 const authRouter = require('../authenticate/auth-routes.js')
 const forms = require('../forms/forms-routes.js')
-const fields = require('../form_fields/form-fields-routes')
-const users = require('../user/user-routes.js')
-const departments = require('../departments/departments-routes.js')
-const defaultRules = require('../form_rules/rules-default-routes.js')
 
 const server = express()
 require('../config/passport')
@@ -37,11 +33,7 @@ server.get('/', (req, res) => {
   res.status(200).send('Hello Earthling')
 })
 
-server.use('/api/users', users)
 server.use('/api/auth', authRouter)
 server.use('/api/forms', forms)
-server.use('/api/fields', fields)
-server.use('/api/departments', departments)
-server.use('/api/rules', defaultRules)
 
 module.exports = server

@@ -12,6 +12,10 @@ passport.deserializeUser(function(obj, done) {
   done(null, obj)
 })
 
+passport.deserializeUser(function(obj, done) {
+  done(null, obj)
+})
+
 const LINKEDIN_API_KEY = '771ecovrndfj2c'
 const LINKEDIN_SECRET_KEY = '6o8jPyhTMVu0QbxR'
 
@@ -21,28 +25,13 @@ passport.use(
     {
       clientID: LINKEDIN_API_KEY,
       clientSecret: LINKEDIN_SECRET_KEY,
-      callbackURL:
-        'https://linkedinextension.herokuapp.com/api/auth/linkedin/callback',
+      callbackURL: 'http://localhost:9001/api/auth/linkedin/callback',
       scope: ['r_emailaddress', 'r_liteprofile']
     },
     function(token, refreshToken, profile, done) {
       //User.findOrCreate({ linkedinId: profile.id}, function (err, user) {
       //return done(err, user);
       //})
-
-      axios
-        .post('https://linkedinextension.herokuapp.com/api/users/user', {
-          first_name: profile.name.givenName,
-          last_name: profile.name.familyName,
-          user_id: profile.id
-        })
-        .then(res => {
-          console.log(res)
-        })
-        .catch(err => {
-          console.log(err)
-        })
-
       console.log(profile)
       console.log('TOKEN', token)
       return done(null, profile)
