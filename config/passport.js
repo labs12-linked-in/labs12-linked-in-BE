@@ -1,4 +1,5 @@
 const passport = require('passport');
+const axios = require('axios');
 const LinkedInStrategy = require('@sokratis/passport-linkedin-oauth2').Strategy;
 
 //passport session setup.
@@ -6,7 +7,7 @@ const LinkedInStrategy = require('@sokratis/passport-linkedin-oauth2').Strategy;
 passport.serializeUser(function(user, done) {
     done(null, user);
   })
-  
+
   passport.deserializeUser(function(obj, done) {
     done(null, obj);
   })
@@ -19,15 +20,18 @@ const LINKEDIN_SECRET_KEY = "6o8jPyhTMVu0QbxR";
 passport.use(new LinkedInStrategy({
     clientID: LINKEDIN_API_KEY,
     clientSecret: LINKEDIN_SECRET_KEY,
-    callbackURL: "https://linkedinextension.herokuapp.com/api/auth/linkedin/callback",
-    scope: [ 'r_emailaddress', 'r_liteprofile'],
+    callbackURL: "http://localhost:9001/api/auth/linkedin/callback",
+    scope: [ 'r_emailaddress', 'r_liteprofile'], passReqToCallback: true
     },
-    function(token, refreshToken, profile, done) {
+     function(req, accessToken, refreshToken, profile, done) {
        //User.findOrCreate({ linkedinId: profile.id}, function (err, user) {
         //return done(err, user);
         //})
-        console.log(profile);
-        console.log('TOKEN', token);
+
+        // console.log("PROFILE ", profile);
+        // console.log("TOKEN ", token);
+        // console.log("REQ ", req);
+         req.session.user = profile;
         return done(null, profile);
     }
 ));
