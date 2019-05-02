@@ -24,10 +24,21 @@ const removeRule = id => {
         .del()
 }
 
+const updateRule = async (id, rule) => {
+    await db('form_rules')
+        .where({ id })
+        .update(rule)
+        .update('updated_at', db.fn.now())
+    return db('form_rules')
+        .where({ id })
+        .first()
+};
+
 module.exports = {
     getByRuleId,
     getAllByRuleId,
     newRule,
     removeRule,
+    updateRule,
 }
 

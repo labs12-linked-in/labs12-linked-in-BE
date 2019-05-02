@@ -29,8 +29,9 @@ router.post('/fields/:userId/:fieldId', async (req, res) => {
 router.get('/fields/:userId/:fieldId', async (req, res) => {
     // if (req.user_id.toString() === req.params.userId) {
         try {
-            const rule = await Rules.getAllByRuleId(req.params.fieldId);
-            res.status(200).json(rule)
+            const rules = await Rules.getAllByRuleId(req.params.fieldId);
+            await rules.sort((a, b) => b.created_at - a.created_at);
+            res.status(200).json(rules)
         } catch (error) {
             console.log(error);
             res.status(500).json({ message: 'Server error retrieving rule' });
@@ -53,6 +54,25 @@ router.delete('/fields/:userId/:fieldId/:ruleId', async (req, res) => {
         } catch (error) {
             console.log(error);
             res.status(500).json({ message: 'Server error deleting rule' })
+        }
+    // } else {
+        // return res.status(401).json({ message: 'Unauthorized' })
+    // }    
+});
+
+// update a rule
+router.put('/fields/:userId/:fieldId/:ruleId', async (req, res) => {
+    // if (req.user_id.toString() === req.params.userId) {
+        try {
+            const newRule = {...req.body};
+            const rule = await Rules.updateRule(
+                req.params.ruleId,
+                newRule
+            );
+            res.status(200).json(rule);
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({ message: 'Server error updating rule' });
         }
     // } else {
         // return res.status(401).json({ message: 'Unauthorized' })
