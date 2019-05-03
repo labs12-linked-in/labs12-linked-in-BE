@@ -22,7 +22,7 @@ const LINKEDIN_SECRET_KEY = "6o8jPyhTMVu0QbxR";
 passport.use(new LinkedInStrategy({
     clientID: LINKEDIN_API_KEY,
     clientSecret: LINKEDIN_SECRET_KEY,
-    callbackURL: "http://localhost:9001/api/auth/linkedin/callback",
+    callbackURL: "https://linkedinextension.herokuapp.com/api/auth/linkedin/callback",
     scope: [ 'r_emailaddress', 'r_liteprofile'],
     passReqToCallback: true
     },
