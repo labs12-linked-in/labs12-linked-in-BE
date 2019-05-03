@@ -2,7 +2,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const passport = require('passport');
-// const cookiesMiddleware = require('universal-cookie-express');
 const cookieSession = require('cookie-session');
 
 const configureMiddleware = require('./middleware.js');
@@ -23,7 +22,6 @@ configureMiddleware(server);
 server.use(bodyParser.json());
 
 
-//server.use(cookiesMiddleware());
 // // Initializing passport and passport.session() middleware to support persistent login sessions
 // server.use(passport.initialize());
 // server.use(passport.session());
