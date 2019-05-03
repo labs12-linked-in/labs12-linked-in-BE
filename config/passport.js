@@ -24,7 +24,7 @@ passport.use(new LinkedInStrategy({
     clientSecret: LINKEDIN_SECRET_KEY,
     callbackURL: "https://linkedinextension.herokuapp.com/api/auth/linkedin/callback",
     scope: [ 'r_emailaddress', 'r_liteprofile'],
-    passReqToCallback: true
+    //passReqToCallback: true
     },
      function(req, accessToken, refreshToken, profile, done) {
        //req.session.accessToken = accessToken;
