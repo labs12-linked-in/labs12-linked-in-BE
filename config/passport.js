@@ -22,13 +22,17 @@ passport.use(new LinkedInStrategy({
     clientSecret: LINKEDIN_SECRET_KEY,
     callbackURL: "http://localhost:9001/api/auth/linkedin/callback",
     scope: [ 'r_emailaddress', 'r_liteprofile'],
+    passReqToCallback: true
     },
-     function(token, refreshToken, profile, done) {
+     function(req, accessToken, refreshToken, profile, done) {
+       req.session.accessToken = accessToken;
+       process.nextTick(function () {
        //User.findOrCreate({ linkedinId: profile.id}, function (err, user) {
         //return done(err, user);
         //})
         console.log(profile);
-        console.log('TOKEN', token);
+        console.log('TOKEN', accessToken);
         return done(null, profile);
+      });
     }
 ));

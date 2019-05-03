@@ -4,6 +4,15 @@ const bcrypt = require('bcryptjs')
 
 //verify if user exists, if so return user if not add user then return user
 
+router.get('/user', async (req,res) => {
+  try {
+    const users = await Users.find(req.query);
+    res.status(200).json(users);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
+
 router.post('/user', async (req, res) => {
   const { user_id } = req.body
 
