@@ -26,9 +26,11 @@ router.get('/linkedin/callback', passport.authenticate('linkedin'), function(
 })
 
 router.get('/authenticate',
-  function(req, res) {
-    
-});
+    function(req, res) {
+      res.render('profile', { user: req.user});
+    }
+)
+
 
 //route middleware that checks if user is authenticated
 //use on any resource that is restricted.
