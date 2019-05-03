@@ -26,6 +26,7 @@ passport.use(new LinkedInStrategy({
     },
      function(req, accessToken, refreshToken, profile, done) {
        req.session.accessToken = accessToken;
+       req.session.user = profile;
        process.nextTick(function () {
        //User.findOrCreate({ linkedinId: profile.id}, function (err, user) {
         //return done(err, user);

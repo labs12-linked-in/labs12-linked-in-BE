@@ -86,14 +86,14 @@ exports.up = function(knex) {
     .createTable('form_rules', table => {
       table.increments()
       table
-        .integer('form_id')
+        .integer('form_field_id')
         .unsigned()
         .notNullable()
         .references('id')
-        .inTable('forms')
+        .inTable('form_fields')
         .onDelete('CASCADE')
         .onUpdate('CASCADE')
-      table.string('name').notNullable()
+      // table.string('name').notNullable()
       table.string('operator').notNullable()
       table.string('text_compare')
       table.integer('number_compare')

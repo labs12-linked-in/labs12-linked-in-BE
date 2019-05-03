@@ -20,7 +20,9 @@ router.get('/linkedin/callback', passport.authenticate('linkedin'), function(
   req,
   res
 ) {
-  res.redirect('http://localhost:3000')
+  req.session.user = req.user;
+  console.log('******* REQ.USER ******* \n', req.user);
+  res.redirect(`http://localhost:3000/?id=${req.user.id}&name=${req.user.name.givenName}`)
 })
 
 router.get('/authenticate',

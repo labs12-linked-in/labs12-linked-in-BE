@@ -2,7 +2,7 @@ const router = require('express').Router();
 
 const RulesDefault = require('./rules-default-models.js');
 
-// add a new form_rules_default
+// add a new default form rule
 router.post('/default/:userId/:formId', async (req, res) => {
     if (!req.body.send_to) {
         res.status(406).json({ message: 'Default delivery must be set' });
@@ -22,7 +22,7 @@ router.post('/default/:userId/:formId', async (req, res) => {
 
 });
 
-// get form_rules_default
+// get the default form rule
 router.get('/default/:userId/:formId', async (req, res) => {
     // if (req.user_id.toString() === req.params.userId) {
         try {
@@ -37,7 +37,7 @@ router.get('/default/:userId/:formId', async (req, res) => {
     // }
 });
 
-// update for_rules_default
+// update the default form rule
 router.put('/default/:userId/:formId', async (req, res) => {
     // if (req.user_id.toString() === req.params.userId) {
         try {
