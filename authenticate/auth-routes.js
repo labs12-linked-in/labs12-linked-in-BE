@@ -26,9 +26,13 @@ router.get('/linkedin/callback', passport.authenticate('linkedin'), function(
   req,
   res
 ) {
-  req.session.user = req.user;
-  console.log('******* REQ.USER ******* \n', req.user);
-  res.redirect(`http://localhost:3000/?id=${req.user.id}&name=${req.user.name.givenName}`)
+  req.session.user = req.user
+  console.log('******* REQ.USER ******* \n', req.user)
+  res.redirect(
+    `https://elated-swirles-c971ca.netlify.com/forms/?id=${req.user.id}&name=${
+      req.user.name.givenName
+    }`
+  )
 })
 
 /*router.get('/google/callback',
@@ -40,13 +44,9 @@ router.get('/linkedin/callback', passport.authenticate('linkedin'), function(
   res.send("You have reached your profile");
 })*/
 
-
-router.get('/authenticate',
-    function(req, res) {
-      res.render('profile', { user: req.user});
-    }
-)
-
+router.get('/authenticate', function(req, res) {
+  res.render('profile', { user: req.user })
+})
 
 //route middleware that checks if user is authenticated
 //use on any resource that is restricted.
