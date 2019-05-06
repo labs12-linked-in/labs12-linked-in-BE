@@ -11,15 +11,18 @@ function find() {
   return db('users');
 }
 
-async function verifyUser(user) {
+async function verifyUser(id) {
+  console.log("ID", id);
+  
   const selected = db('users')
-    .where('user_id', user.user_id)
+    .where('user_id', id)
     .first()
 
   return selected
 }
 
 async function addUser(user) {
+  console.log("USER", user);
   const [id] = await db('users')
     .returning('id')
     .insert(user)
