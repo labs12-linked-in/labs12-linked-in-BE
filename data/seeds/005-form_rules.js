@@ -1,28 +1,24 @@
 exports.seed = function(knex) {
     return knex('form_rules').insert([
         {
-            form_id: 1,
-            name: 'Picture',
+            form_field_id: 1,
             operator: 'Exists',
             send_to: 'Data',
         },
         {
-            form_id: 2,
-            name: 'Headline',
+            form_field_id: 2,
             operator: 'Contains',
             text_compare: 'CEO',
             send_to: 'Engineering',
         },
         {
-            form_id: 2,
-            name: 'Location',
+            form_field_id: 2,
             operator: 'does not contain',
             text_compare: 'San Francisco',
             send_to: 'Data',
         },
         {
-            form_id: 2,
-            name: 'Total Endorsements',
+            form_field_id: 2,
             operator: 'is greater than',
             number_compare: 50,
             send_to: 'Data',
