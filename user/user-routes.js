@@ -40,11 +40,11 @@ router.post('/user', async (req, res) => {
     res.status(400).json({ message: 'Please provide user id.' })
   }
 
-  User.verifyUser('wpmRPZ3gcX')
+  User.verifyUser(id)
     .then(async user => {
       // console.log("THIS ONE", user)
       if (user == null) {
-        const newUser = await User.addUser({ user_id: 'wpmRPZ3gcX', first_name: 'sdsk', last_name: 'ldnk'})
+        const newUser = await User.addUser({ user_id: id, first_name: firstName, last_name: lastName})
         res.status(200).json(newUser)
       }
       res.status(200).json(user)
