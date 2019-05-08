@@ -16,7 +16,7 @@ router.get("/user", async (req, res) => {
 router.post("/user", async (req, res) => {
   const response = await axios.get("https://api.linkedin.com/v2/me", {
     headers: {
-      Authorization: "Bearer " + req.body.result.access_token,
+      Authorization: "Bearer " + req.body.access_token,
       Connection: "Keep-Alive"
     }
   });
