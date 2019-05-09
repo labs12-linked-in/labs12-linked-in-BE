@@ -1,6 +1,8 @@
-const router = require('express').Router()
+const router = require('express').Router();
 
-const Forms = require('./forms-models.js')
+const Forms = require('./forms-models.js');
+const Users = require('../user/user-model.js');
+const Fields = require('../form_fields/form-fields-model.js');
 
 // add a new form
 router.post('/:userId', async (req, res) => {
@@ -20,7 +22,7 @@ router.post('/:userId', async (req, res) => {
     console.log(error)
     res.status(500).json({ message: 'Server error creating new form' })
   }
-})
+});
 
 // get all forms
 router.get('/:userId', async (req, res) => {
@@ -36,7 +38,41 @@ router.get('/:userId', async (req, res) => {
   // } else {
   // return res.status(401).json({ message: 'Unauthorized' })
   // }
-})
+});
+
+// get form by id
+router.get('/1/3'), async (req, res) => {
+  console.log("Not even here")
+  try {
+    const form = await Forms.getByFormId(3)
+    console.log(form);
+    // const user = await Users.getByUserId(req.params.userId)
+    // const fields = await Fields.getFieldsByForm(form.id).map(
+    //   async field => {
+    //     const fieldUser = await Users.getUserById(field.user_id)
+    //     delete field.user_id
+    //     delete field.dept_id
+    //     delete fieldUser.password
+    //     return {
+    //       ...field,
+    //       user: fieldUser
+    //     }
+    //   }
+    // )
+
+    // delete user.password
+
+    // const returning = {
+      // ...form,
+      // user: user,
+      // fields: fields
+    // }
+    res.status(200).json(form)
+  } catch (error) {
+      console.log(err)
+      res.status(500).json({ message: 'Server error retrieving form' })
+  }
+};
 
 // delete a form
 router.delete('/:userId/:formId', async (req, res) => {
@@ -55,7 +91,7 @@ router.delete('/:userId/:formId', async (req, res) => {
   // } else {
   //     return res.status(401).json({ message: 'Unauthorized' })
   // }
-})
+});
 
 // update a form
 router.put('/:userId/:formId', async (req, res) => {
@@ -71,6 +107,6 @@ router.put('/:userId/:formId', async (req, res) => {
   // } else {
   //     return res.status(401).json({ message: 'Unauthorized' })
   // }
-})
+});
 
-module.exports = router
+module.exports = router;
