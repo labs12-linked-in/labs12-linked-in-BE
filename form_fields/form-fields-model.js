@@ -9,8 +9,8 @@ module.exports = {
 
 async function addField(field) {
   const [id] = await db('form_fields')
-    .returning('id')
     .insert(field)
+    .returning('id')
   return db('form_fields').where({ id })
 }
 
@@ -28,6 +28,6 @@ async function getFieldsByForm(id) {
 
 async function deleteField(id) {
   return db('form_fields')
-    .where('id', id)
     .del()
+    .where('id', id)
 }
