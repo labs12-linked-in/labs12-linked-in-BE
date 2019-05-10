@@ -41,38 +41,15 @@ router.get('/:userId', async (req, res) => {
 });
 
 // get form by id
-router.get('/1/3'), async (req, res) => {
-  console.log("Not even here")
+router.get('/:userId/:formId', async (req, res) => {
   try {
-    const form = await Forms.getByFormId(3)
-    console.log(form);
-    // const user = await Users.getByUserId(req.params.userId)
-    // const fields = await Fields.getFieldsByForm(form.id).map(
-    //   async field => {
-    //     const fieldUser = await Users.getUserById(field.user_id)
-    //     delete field.user_id
-    //     delete field.dept_id
-    //     delete fieldUser.password
-    //     return {
-    //       ...field,
-    //       user: fieldUser
-    //     }
-    //   }
-    // )
-
-    // delete user.password
-
-    // const returning = {
-      // ...form,
-      // user: user,
-      // fields: fields
-    // }
+    const form = await Forms.getByFormId(req.params.formId);
     res.status(200).json(form)
   } catch (error) {
-      console.log(err)
+      console.log(error)
       res.status(500).json({ message: 'Server error retrieving form' })
   }
-};
+});
 
 // delete a form
 router.delete('/:userId/:formId', async (req, res) => {
