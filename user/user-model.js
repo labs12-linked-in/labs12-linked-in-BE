@@ -9,7 +9,7 @@ module.exports = {
 
 function find() {
   return db('users');
-}
+};
 
 async function verifyUser(id) {
   console.log("ID", id);
@@ -19,7 +19,7 @@ async function verifyUser(id) {
     .first()
 
   return selected
-}
+};
 
 async function addUser(user) {
   console.log("USER", user);
@@ -29,7 +29,7 @@ async function addUser(user) {
   return db('users')
     .where({ id })
     .first()
-}
+};
 
 async function deleteUser(id) {
   const deleted = db('users')
@@ -38,4 +38,5 @@ async function deleteUser(id) {
   console.log(deleted, 'hi')
 
   return deleted
-}
+};
+
