@@ -20,6 +20,7 @@ const getAllByUserId = id => {
     .select(
       'forms.id as form_id',
       'forms.name',
+      'forms.field_count',
       'forms.created_at',
       'forms.updated_at',
       'users.id as user_id',
