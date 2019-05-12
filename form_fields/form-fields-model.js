@@ -14,10 +14,12 @@ async function addField(field) {
   return db('form_fields').where({ id })
 }
 
-async function updateField(field) {
+async function updateField(field, field_id) {
   const [id] = await db('form_fields')
     .returning('id')
-    .update(field)
+    .update({ name: field.name, selected: field.selected })
+    .where({ id: field_id })
+
   return db('form_fields').where({ id })
 }
 

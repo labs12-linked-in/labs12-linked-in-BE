@@ -47,7 +47,28 @@ router.get('/field', async (req, res) => {
     })
 })
 
-//delete form
+// update field
+router.put('/field', async (req, res) => {
+  const { name, selected } = req.body
+
+  if (!name) {
+    res.status(400).json({ message: 'Please provide name.' })
+  }
+  if (!selected) {
+    res.status(400).json({ message: 'Please provide selected.' })
+  }
+
+  Fields.updateField({ name, selected }, req.body.id)
+    .then(async field => {
+      res.status(200).json(field)
+    })
+    .catch(error => {
+      console.log(error)
+      res.status(500).json({ err: 'Could not update field', error })
+    })
+})
+
+//delete form field
 router.delete('/field', (req, res) => {
   const { id } = req.body
 
