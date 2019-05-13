@@ -69,8 +69,8 @@ router.put('/field', async (req, res) => {
 })
 
 //delete form field
-router.delete('/field', (req, res) => {
-  const { id } = req.body
+router.delete('/field/:fieldId', (req, res) => {
+  const id = req.params.fieldId
 
   if (!id) {
     res.status(400).json({ message: 'Please provide field id.' })
