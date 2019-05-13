@@ -30,8 +30,8 @@ router.post('/field', async (req, res) => {
 })
 
 // get fields by form id
-router.get('/field', async (req, res) => {
-  const { form_id } = req.body
+router.get('/field/:fieldId', async (req, res) => {
+  const form_id = req.params.fieldId
 
   if (!form_id) {
     res.status(400).json({ message: 'Please provide form_id.' })
