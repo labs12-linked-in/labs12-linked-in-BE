@@ -50,15 +50,11 @@ router.get('/field/:fieldId', async (req, res) => {
 // update field
 router.put('/field', async (req, res) => {
   const { name, selected } = req.body
-
   if (!name) {
     res.status(400).json({ message: 'Please provide name.' })
   }
-  if (!selected) {
-    res.status(400).json({ message: 'Please provide selected.' })
-  }
 
-  Fields.updateField({ name, selected }, req.body.field_id)
+  Fields.updateField({ name }, req.body.id)
     .then(async field => {
       res.status(200).json(field)
     })

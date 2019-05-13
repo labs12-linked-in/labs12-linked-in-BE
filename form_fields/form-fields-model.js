@@ -15,8 +15,6 @@ async function addField(field) {
 }
 
 async function updateField(field, field_id) {
-  console.log(field, 'field')
-  console.log(field_id, 'field_id')
   const [id] = await db('form_fields')
     .returning('id')
     .update('name', field.name)
