@@ -58,7 +58,7 @@ router.put('/field', async (req, res) => {
     res.status(400).json({ message: 'Please provide selected.' })
   }
 
-  Fields.updateField({ name, selected }, req.body.form_id)
+  Fields.updateField({ name, selected }, req.body.field_id)
     .then(async field => {
       res.status(200).json(field)
     })
