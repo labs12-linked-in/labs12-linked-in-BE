@@ -51,8 +51,6 @@ exports.up = function(knex) {
         .onDelete('CASCADE')
         .onUpdate('CASCADE')
       table.string('name').notNullable()
-      table.string('type').notNullable()
-      table.string('selected').notNullable()
       table
         .datetime('created_at')
         .notNullable()
@@ -100,7 +98,6 @@ exports.up = function(knex) {
         .inTable('form_fields')
         .onDelete('CASCADE')
         .onUpdate('CASCADE')
-      // table.string('name').notNullable()
       table.string('operator').notNullable()
       table.string('text_compare')
       table.integer('number_compare')

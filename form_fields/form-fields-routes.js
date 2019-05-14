@@ -4,19 +4,13 @@ const Fields = require('./form-fields-model.js')
 
 // add a form field
 router.post('/field', async (req, res) => {
-  const { form_id, name, type, selected } = req.body
+  const { form_id, name } = req.body
 
   if (!form_id) {
     res.status(400).json({ message: 'Please provide form_id.' })
   }
   if (!name) {
     res.status(400).json({ message: 'Please provide name.' })
-  }
-  if (!type) {
-    res.status(400).json({ message: 'Please provide type.' })
-  }
-  if (!selected) {
-    res.status(400).json({ message: 'Please provide selected.' })
   }
 
   Fields.addField(req.body)
@@ -49,7 +43,7 @@ router.get('/field/:fieldId', async (req, res) => {
 
 // update field
 router.put('/field', async (req, res) => {
-  const { name, selected } = req.body
+  const { name } = req.body
   if (!name) {
     res.status(400).json({ message: 'Please provide name.' })
   }
