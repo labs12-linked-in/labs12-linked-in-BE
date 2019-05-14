@@ -64,7 +64,7 @@ exports.up = function(knex) {
       ' CREATE OR REPLACE FUNCTION add_one() RETURNS trigger LANGUAGE plpgsql AS $$ BEGIN UPDATE forms SET field_count = field_count + 1 WHERE id = NEW.form_id; RETURN NEW; END; $$; CREATE TRIGGER add AFTER INSERT ON form_fields FOR EACH ROW EXECUTE FUNCTION add_one();'
     )
     .raw(
-      ' CREATE OR REPLACE FUNCTION subtract_one() RETURNS trigger LANGUAGE plpgsql AS $$ BEGIN UPDATE forms SET field_count = field_count - 1 WHERE id = OLD.form_id; RETURN NEW; END;  $$; CREATE TRIGGER subtract BEFORE DELETE ON form_fields FOR EACH ROW EXECUTE FUNCTION subtract_one();'
+      ' CREATE OR REPLACE FUNCTION subtract_one() RETURNS trigger LANGUAGE plpgsql AS $$ BEGIN UPDATE forms SET field_count = field_count - 1 WHERE id = OLD.form_id; RETURN NEW; END;  $$; CREATE TRIGGER subtract AFTER DELETE ON form_fields FOR EACH ROW EXECUTE FUNCTION subtract_one();'
     )
 
     .createTable('form_rules_default', table => {
