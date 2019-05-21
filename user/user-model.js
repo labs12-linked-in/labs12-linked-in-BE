@@ -1,19 +1,34 @@
 const db = require('../data/dbConfig.js')
+const jwt = require('jsonwebtoken')
+const secret = require('../auth/secret.js')
 
 module.exports = {
   find,
   verifyUser,
   addUser,
-  deleteUser
+  deleteUser,
+  generateToken
+}
+
+function generateToken() {
+  const payload = {
+    message: 'Onward!'
+  }
+
+  const options = {
+    expiresIn: '1d'
+  }
+
+  return jwt.sign(payload, secret.jwtSecret, options)
 }
 
 function find() {
-  return db('users');
+  return db('users')
 }
 
 async function verifyUser(id) {
-  console.log("ID", id);
-  
+  console.log('ID', id)
+
   const selected = db('users')
     .where('user_id', id)
     .first()
@@ -22,7 +37,7 @@ async function verifyUser(id) {
 }
 
 async function addUser(user) {
-  console.log("USER", user);
+  console.log('USER', user)
   const [id] = await db('users')
     .returning('id')
     .insert(user)

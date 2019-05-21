@@ -36,15 +36,16 @@ router.post('/user', async (req, res) => {
 
   User.verifyUser(id)
     .then(async user => {
+      const token = User.generateToken()
       if (user == null) {
         const newUser = await User.addUser({
           user_id: id,
           first_name: firstName,
           last_name: lastName
         })
-        res.status(200).json(newUser)
+        res.status(200).json({ userInfo: newUser, token: token })
       }
-      res.status(200).json(user)
+      res.status(200).json({ userInfo: user, token: token })
     })
     .catch(error => {
       res.status(500).json({ err: 'Could not verify user', error })
