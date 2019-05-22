@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const stripe = require('stripe')('STRIPE_SECRET_KEY')
+const stripe = require('stripe')('sk_test_zblixyD9QYI3hcehz0zGtG8z003HiGN3Nf')
 const uuid = require('uuid/v4')
 
 router.post('/checkout', async (req, res) => {
