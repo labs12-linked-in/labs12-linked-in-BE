@@ -6,6 +6,7 @@ const departments = require('../departments/departments-routes.js')
 const defaultRules = require('../form_rules/rules-default-routes.js')
 const rules = require('../form_rules/rules-routes.js')
 const fields = require('../form_fields/form-fields-routes')
+const checkout = require('../checkout/checkout.js')
 const restricted = require('../auth/restrictedMiddleware.js')
 
 const server = express()
@@ -19,6 +20,7 @@ server.get('/', (req, res) => {
 })
 
 server.use('/api/users', users)
+server.use('/api/payment', checkout)
 server.use('/api/forms', restricted, forms)
 server.use('/api/fields', restricted, fields)
 server.use('/api/departments', restricted, departments)
