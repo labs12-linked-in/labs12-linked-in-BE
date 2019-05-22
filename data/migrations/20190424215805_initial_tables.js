@@ -4,6 +4,7 @@ exports.up = function(knex) {
       table.increments()
       table.string('first_name').notNullable()
       table.string('last_name').notNullable()
+      table.boolean('pro').defaultTo(false)
       table
         .string('user_id')
         .notNullable()

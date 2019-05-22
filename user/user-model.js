@@ -7,7 +7,8 @@ module.exports = {
   verifyUser,
   addUser,
   deleteUser,
-  generateToken
+  generateToken,
+  upgradeUser
 }
 
 function generateToken() {
@@ -53,4 +54,15 @@ async function deleteUser(id) {
   console.log(deleted, 'hi')
 
   return deleted
+}
+
+async function upgradeUser(id) {
+  const [id] = db('users')
+    .where('user_id', id)
+    .update('pro', true)
+    .returning('id')
+
+  return db('users')
+    .where({ id })
+    .first()
 }
