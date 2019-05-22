@@ -56,13 +56,12 @@ async function deleteUser(id) {
   return deleted
 }
 
-async function upgradeUser(id) {
-  const [id] = db('users')
-    .where('user_id', id)
-    .update('pro', true)
-    .returning('id')
+async function upgradeUser(user_id) {
+  await db('users')
+    .update({ pro: true })
+    .where({ user_id })
 
   return db('users')
-    .where({ id })
+    .where({ user_id })
     .first()
 }

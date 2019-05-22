@@ -83,7 +83,7 @@ router.post('/upgrade', (req, res) => {
 
   User.upgradeUser(user_id)
     .then(response => {
-      console.log(res, 'res')
+      console.log(response, 'res')
       res
         .status(200)
         .json({ message: 'user has been upgraded to a pro account!' })
