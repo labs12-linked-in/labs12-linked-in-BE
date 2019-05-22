@@ -73,4 +73,25 @@ router.delete('/banish', (req, res) => {
     })
 })
 
+// upgrade user
+router.post('/upgrade', (req, res) => {
+  const { user_id } = req.body
+
+  if (!user_id) {
+    res.status(400).json({ message: 'Please provide user id.' })
+  }
+
+  User.upgradeUser(user_id)
+    .then(response => {
+      console.log(response, 'res')
+      res
+        .status(200)
+        .json({ message: 'user has been upgraded to a pro account!' })
+    })
+    .catch(error => {
+      console.log(error, 'er')
+      res.status(500).json({ err: 'Could not upgrade user', error })
+    })
+})
+
 module.exports = router
