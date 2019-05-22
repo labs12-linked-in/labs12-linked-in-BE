@@ -37,7 +37,7 @@ const removeForm = id => {
 
 const updateForm = async (id, form) => {
   await db('forms')
-    .where({ id: form.form_id })
+    .where({ id: form.id })
     .update({ name: form.name })
     .update('updated_at', db.fn.now())
   return db('forms')
