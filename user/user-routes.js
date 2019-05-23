@@ -89,7 +89,7 @@ router.get('/upgrade/:id', async (req, res) => {
   console.log(count, 'count')
 
   if (status.pro == false && count >= 3) {
-    res.status(406).json({
+    res.status(200).json({
       message: 'Upgrade account to pro for more forms',
       pro: status.pro,
       form_count: count

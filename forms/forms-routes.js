@@ -8,12 +8,12 @@ const Fields = require('../form_fields/form-fields-model.js')
 router.post('/:userId', async (req, res) => {
   const status = await Forms.getStatus(req.params.userId)
   console.log(status, 'status')
-  const count = await Forms.getFormCount(req.params.userId)
+  let count = await Forms.getFormCount(req.params.userId)
   count = parseInt(count.count, 10)
   console.log(count, 'count')
 
   if (status.pro == false && count >= 3) {
-    res.status(406).json({
+    res.status(200).json({
       message: 'Upgrade account to pro for more forms',
       pro: status.pro,
       form_count: count
