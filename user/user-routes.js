@@ -73,6 +73,36 @@ router.delete('/banish', (req, res) => {
     })
 })
 
+// check if user is pro
+router.get('/upgrade/:id', async (req, res) => {
+  const id = req.params.id
+
+  if (!id) {
+    res.status(400).json({ message: 'Please provide user id.' })
+  }
+
+  const status = await User.getStatus(id)
+  console.log(status, 'status')
+  let count = await User.getFormCount(id)
+  count = parseInt(count.count, 10)
+
+  console.log(count, 'count')
+
+  if (status.pro == false && count >= 3) {
+    res.status(200).json({
+      message: 'Upgrade account to pro for more forms',
+      pro: status.pro,
+      form_count: count
+    })
+  } else {
+    res.status(200).json({
+      message: 'User can make forms',
+      pro: status.pro,
+      form_count: count
+    })
+  }
+})
+
 // upgrade user
 router.post('/upgrade', (req, res) => {
   const { user_id } = req.body

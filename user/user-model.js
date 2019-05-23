@@ -8,7 +8,9 @@ module.exports = {
   addUser,
   deleteUser,
   generateToken,
-  upgradeUser
+  upgradeUser,
+  getStatus,
+  getFormCount
 }
 
 function generateToken() {
@@ -63,5 +65,19 @@ async function upgradeUser(user_id) {
 
   return db('users')
     .where({ user_id })
+    .first()
+}
+
+async function getStatus(id) {
+  return db('users')
+    .select('pro')
+    .where({ id })
+    .first()
+}
+
+async function getFormCount(id) {
+  return db('forms')
+    .count('user_id')
+    .where({ user_id: id })
     .first()
 }

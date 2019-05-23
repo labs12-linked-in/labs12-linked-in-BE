@@ -1,11 +1,25 @@
-const router = require('express').Router();
+const router = require('express').Router()
 
-const Forms = require('./forms-models.js');
-const Users = require('../user/user-model.js');
-const Fields = require('../form_fields/form-fields-model.js');
+const Forms = require('./forms-models.js')
+const Users = require('../user/user-model.js')
+const Fields = require('../form_fields/form-fields-model.js')
 
 // add a new form
 router.post('/:userId', async (req, res) => {
+  const status = await Forms.getStatus(req.params.userId)
+  console.log(status, 'status')
+  let count = await Forms.getFormCount(req.params.userId)
+  count = parseInt(count.count, 10)
+  console.log(count, 'count')
+
+  if (status.pro == false && count >= 3) {
+    res.status(200).json({
+      message: 'Upgrade account to pro for more forms',
+      pro: status.pro,
+      form_count: count
+    })
+  }
+
   if (!req.body.name) {
     res.status(406).json({ message: 'Form name required' })
 
@@ -22,7 +36,7 @@ router.post('/:userId', async (req, res) => {
     console.log(error)
     res.status(500).json({ message: 'Server error creating new form' })
   }
-});
+})
 
 // get all forms
 router.get('/:userId', async (req, res) => {
@@ -38,18 +52,18 @@ router.get('/:userId', async (req, res) => {
   // } else {
   // return res.status(401).json({ message: 'Unauthorized' })
   // }
-});
+})
 
 // get form by id
 router.get('/:userId/:formId', async (req, res) => {
   try {
-    const form = await Forms.getByFormId(req.params.formId);
+    const form = await Forms.getByFormId(req.params.formId)
     res.status(200).json(form)
   } catch (error) {
-      console.log(error)
-      res.status(500).json({ message: 'Server error retrieving form' })
+    console.log(error)
+    res.status(500).json({ message: 'Server error retrieving form' })
   }
-});
+})
 
 // delete a form
 router.delete('/:userId/:formId', async (req, res) => {
@@ -68,7 +82,7 @@ router.delete('/:userId/:formId', async (req, res) => {
   // } else {
   //     return res.status(401).json({ message: 'Unauthorized' })
   // }
-});
+})
 
 // update a form
 router.put('/:userId/:formId', async (req, res) => {
@@ -84,6 +98,6 @@ router.put('/:userId/:formId', async (req, res) => {
   // } else {
   //     return res.status(401).json({ message: 'Unauthorized' })
   // }
-});
+})
 
-module.exports = router;
+module.exports = router
