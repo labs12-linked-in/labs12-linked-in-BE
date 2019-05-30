@@ -19,7 +19,7 @@ function generateToken() {
   }
 
   const options = {
-    expiresIn: '1d'
+    expiresIn: '365d'
   }
 
   return jwt.sign(payload, secret.jwtSecret, options)

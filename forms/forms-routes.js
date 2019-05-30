@@ -12,7 +12,7 @@ router.post('/:userId', async (req, res) => {
   count = parseInt(count.count, 10)
   console.log(count, 'count')
 
-  if (status.pro == false && count >= 3) {
+  if (status.pro == false && count >= 1) {
     res.status(200).json({
       message: 'Upgrade account to pro for more forms',
       pro: status.pro,
