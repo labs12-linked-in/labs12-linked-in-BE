@@ -28,7 +28,7 @@ module.exports = {
     client: "pg",
     connection: {
       connectionString: prodDbConnection,
-      ssl: true,
+      ssl: {rejectUnauthorized: false},
     },
     migrations: { directory: "./data/migrations" },
     seeds: { directory: "./data/seeds/" }
