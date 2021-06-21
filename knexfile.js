@@ -6,7 +6,7 @@ const localPgConnection = {
   password: process.env.DB_PASSWORD,
   database: "linkedinchrome"
 };
-
+console.log()
 const prodDbConnection = process.env.DATABASE_URL || localPgConnection;
 
 module.exports = {
@@ -26,7 +26,10 @@ module.exports = {
 
   production: {
     client: "pg",
-    connection: prodDbConnection,
+    connection: {
+      connectionString: prodDbConnection,
+      ssl: { rejectUnauthorized },
+    },
     migrations: { directory: "./data/migrations" },
     seeds: { directory: "./data/seeds/" }
   }
